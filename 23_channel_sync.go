@@ -26,6 +26,9 @@ func main() {
 	done := make(chan bool, 1)
 	go delay(done)
 
+	// Very important to call on the result (<-done), even if we don’t need to
+	// assign it to a variable. Without it, the program would exit before the
+	// goroutine had a chance to run!
 	notified := <-done
 	fmt.Println(notified)
 
